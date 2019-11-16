@@ -1,5 +1,7 @@
 // // eslint-disable-next-line
 import React, {Component} from 'react';
+var GitHub = require('github-api');
+const axios = require('axios');
 //Import the bootstrap react style sheets.
 //import './style.css'
 
@@ -13,13 +15,7 @@ class Form extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
     }
-    /* Handle Change
-      Here write a function that is called onChange in the react
-      render. It should use setState() to change the state of username
-      and password.
 
-      Identify the field being changed with "name" in the JSX element.
-    */
    handleChange(event){
     const target = event.target;
     const value = target.value;
@@ -31,13 +27,20 @@ class Form extends Component {
    }
 
     handleSubmit(event) {
+      event.preventDefault();
       console.log(this.state.username);
       console.log(this.state.password);
-      
-      event.preventDefault();
-      //const form = event.target;
-      //const data = new FormData(form);
-        
+
+      axios.get('https://api.github.com/users/caolanwall/repos')
+      .then(function (response) {
+        // handle success
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+
       this.setState({
           invalid: false,
           displayErrors: false,
@@ -60,7 +63,7 @@ class Form extends Component {
         <label htmlFor="password">Password:</label>
         <input id="password" name="password" type="password" required onChange={this.handleChange}/>
 
-        <button onClick={this.handleSubmit}>Send data!</button>
+        <button onClick={this.handleSubmit}>Login</button>
       </form>
       
     </div>
