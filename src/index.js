@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-//import myForm from "./Form";
-
+console.log("Running");
+//alert("running");
 ReactDOM.render(<App />, document.getElementById('root'));
-
+//console.log("Running");
 
 
 
