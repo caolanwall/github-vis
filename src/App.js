@@ -49,7 +49,8 @@ class App extends Component {
   
   render(){
     return (
-      <div>
+    <div>
+    <div>
         {!this.state.submit ? 
         (< Form 
         onChange={this.handleChange} 
@@ -58,6 +59,9 @@ class App extends Component {
           <Homepage repos= {this.state.repos} info= {this.state.info} />
         ) }
       </div>
+      
+      </div>
+      
     );
   }
 }
