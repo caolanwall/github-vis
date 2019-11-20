@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import Form from './Form.js';
 import Homepage from './Homepage.js'
-
-const axios = require('axios');
-//import bootstrap from '';
-//import ShakingError from './Form.js'
-//const { MyForm } = require("Form.js");
+const Octokit = require("@octokit/rest");
+const octokit = new Octokit();
 
 class App extends Component {
   constructor() {
@@ -15,17 +12,17 @@ class App extends Component {
       username:'',
       password:'',
       submit: false,
+      info: '',
+      repos: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
  handleChange(event){
- // const target = event.target;
-  const value = event.target.value;
-  const name = event.target.name;
-  console.log('yurt');
-
+  const target = event.target;
+  const value = target.value;
+  const name = target.name;
   this.setState({
     [name]: value
   });
@@ -34,21 +31,20 @@ class App extends Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.username);
-    console.log(this.state.password);
+    octokit.authenticate({username: this.state.username, password: this.state.password, type: "basic"});
 
-    axios.get('https://api.github.com/users/'+this.state.username)
-    .then(function (response) {
-      console.log(response);
-
+    octokit.users.getAuthenticated().then(result => {
+      this.setState({
+      info : result.data
     })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
     });
-
-    this.setState({
-        submit: true
+    octokit.repos.list().then(result => {
+      this.setState({
+      repos : result.data,
+      submit: true
     });
+  });
+    //console.log(this.state.repos);
   }
   
   render(){
@@ -59,7 +55,7 @@ class App extends Component {
         onChange={this.handleChange} 
         onSubmit={this.handleSubmit} />
         ) : (
-          <Homepage />
+          <Homepage repos= {this.state.repos} info= {this.state.info} />
         ) }
       </div>
     );
