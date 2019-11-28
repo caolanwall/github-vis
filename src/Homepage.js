@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Charts from './components/Charts.js'
-import * as d3 from "d3";
+import Pie from './components/Pie.js'
+import {Card} from 'react'
 
 const imgStyle = {
+  borderRadius: "50%",
   width: "200px",
   height: "200px"
 };
@@ -26,20 +29,19 @@ class Homepage extends Component {
     return array;
   }
   stringifyLanguages (){
-    this.countLanguages();
     langs = this.getLanguages();
     pang = langs.join(', ')
     return pang;
   }
 
-  countLanguages(){
+  countLanguages(r){
     var a = [], b = [], array= [], prev;
-    for(var i =0; i < this.props.repos.length; i++){
-      if(this.props.repos[i].language != null)
-      langArray.push(this.props.repos[i].language);
+    for(var k =0; k < this.props.repos.length; k++){
+      if(this.props.repos[k].language != null)
+      langArray.push(this.props.repos[k].language);
       
     }
-    console.log(langArray);
+    //console.log(langArray);
     langArray.sort();
     for ( var i = 0; i < langArray.length; i++ ) {
         if ( langArray[i] !== prev ) {
@@ -50,60 +52,69 @@ class Homepage extends Component {
         }
         prev = langArray[i];
     }
-    for(var j =0; j<a.length; j++){
-      array.push([a[j], b[j]])
+    if(r == true){
+      console.log(a);
+      return a;
+    } else if (r == false){
+      console.log(b);
+      return b;
     }
-    console.log(array);
-    return array;
+
+    // for(var j =0; j<a.length; j++){
+    //   array.push([a[j], b[j]])
+    // }
+    // console.log(array);
+    return a, b;
   }
   
 
   render () {
   return (
+    <div>
+    <div className ="div2">
     
+    </div>
     <Container>
       <Row>
-        <Col md={{ span: 3}}><img src={this.props.info.avatar_url}
-               alt="Profile" style={imgStyle}/>
-               <p></p>
-              <p> {this.props.info.login}</p>
-              <p> {this.props.info.bio}</p>
-               </Col>
-        <Col md={{ span: 3}}>
-          <p> Followers: {this.props.info.followers}</p>
-          <p> Repos: {this.props.repos.length}</p>
-          <Charts />
-        </Col>
-        <Col>
-          <p> Following: {this.props.info.following}</p>
-          <p> Languages: {this.stringifyLanguages()}</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>1 of 3</Col>
-        <Col>2 of 3</Col>
-        <Col>3 of 3</Col>
-      </Row>
-    </Container>
-      // <div class="d-flex flex-column">
-      //   <img src={this.props.info.avatar_url}
-      //             alt="Profile" style={imgStyle}/> 
-      //   <div class="p-2 d-flex">
-      //     <p> {this.props.info.login}</p>
-      //   </div>
-      //   <div class="p-2 d-flex">
-      //     <p> {this.props.info.bio}</p>
-      //   </div>
-      //     <div class="d-flex flex-column">
-      //     </div>
-      //       <div class="p-2 d-flex">
-      //        <p> Followers: {this.props.info.followers}</p>
-      //       </div>
-      //       <div class="p-2 d-flex">
-      //        <p> Following: {this.props.info.following}</p>
-      //       </div>
-      // </div>  
-  
+        
+      <Col md={{ span: 3}}>
+      <center>
+        <img src={this.props.info.avatar_url}
+                alt="Profile" style={imgStyle}/>
+                <p></p>
+                
+                <p> <h4>{this.props.info.login}</h4></p>
+               
+                <p> {this.props.info.bio}</p>
+                </center>
+      </Col>
+      
+      <Col md={{ span: 6}}>
+          <p> Followers: <b>{this.props.info.followers}</b></p>
+        
+          <p> Repos: <b>{this.props.repos.length}</b></p>
+
+        
+            <Pie data={this.countLanguages(false)} labels={this.countLanguages(true)} />
+            
+      </Col>
+      <Col>
+          <p> Following: <b>{this.props.info.following}</b></p>
+          <p> Languages: <b>{this.stringifyLanguages()}</b></p>
+      </Col>
+            
+        </Row>
+        <Row>
+          <Col>
+      
+            </Col>
+        </Row>
+
+      
+      
+      
+    </Container>  
+    </div>
   )
 };
 }

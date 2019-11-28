@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Form from './Form.js';
 import Homepage from './Homepage.js'
+import Pie from './components/Pie.js'
 const Octokit = require("@octokit/rest");
 const octokit = new Octokit();
 
@@ -50,7 +51,7 @@ class App extends Component {
   render(){
     return (
     <div>
-    <div>
+       <div>
         {!this.state.submit ? 
         (< Form 
         onChange={this.handleChange} 
@@ -58,12 +59,22 @@ class App extends Component {
         ) : (
           <Homepage repos= {this.state.repos} info= {this.state.info} />
         ) }
+        
       </div>
-      
-      </div>
+    </div>
       
     );
   }
 }
+
+/* <div>
+        {!this.state.submit ? 
+        (< Form 
+        onChange={this.handleChange} 
+        onSubmit={this.handleSubmit} />
+        ) : (
+          <Homepage repos= {this.state.repos} info= {this.state.info} />
+        ) }
+      </div> */
 
 export default App;

@@ -3,3 +3,12 @@
 .contain{
     width: "200px";
 }
+.div2 {
+    width: 50%;
+    height: 70%;
+    border: 10% solid red;
+  }
+
+.bg {
+    background-color: aliceblue;
+}
