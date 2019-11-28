@@ -1,14 +1,4 @@
-﻿GitHub Visualisation
-17329660
-
-This is a web app built on react showing statistics for a logged in user. The user is authenticated to up the limit of requests from 60 per hour to 5000 per hour. It also uses bootstrap for displaying the information. 
-Login page
-Once the user has been authenticated.
-Showing the hover feature over the pie chart.
-
-This project was bootstrapped with [Create React 
-
-App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -76,4 +66,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-

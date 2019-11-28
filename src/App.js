@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './App.css';
 import Form from './Form.js';
 import Homepage from './Homepage.js'
-import Pie from './components/Pie.js'
 const Octokit = require("@octokit/rest");
 const octokit = new Octokit();
 
@@ -16,8 +15,13 @@ class App extends Component {
       info: '',
       repos: ''
     };
+    this.baseState = this.state;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+  
+  reset(){
+    this.setState(this.baseState);
   }
 
  handleChange(event){
@@ -29,11 +33,16 @@ class App extends Component {
   });
  }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.username);
-    octokit.authenticate({username: this.state.username, password: this.state.password, type: "basic"});
-
+    try{
+      octokit.authenticate({username: this.state.username, password: this.state.password, type: "basic"});
+    }
+    catch(err){
+      alert("Incorrect credentials, please try again");
+      this.reset();
+    }
     octokit.users.getAuthenticated().then(result => {
       this.setState({
       info : result.data
@@ -66,15 +75,5 @@ class App extends Component {
     );
   }
 }
-
-/* <div>
-        {!this.state.submit ? 
-        (< Form 
-        onChange={this.handleChange} 
-        onSubmit={this.handleSubmit} />
-        ) : (
-          <Homepage repos= {this.state.repos} info= {this.state.info} />
-        ) }
-      </div> */
 
 export default App;

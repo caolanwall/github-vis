@@ -4,9 +4,7 @@ import './style.css'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Charts from './components/Charts.js'
 import Pie from './components/Pie.js'
-import {Card} from 'react'
 
 const imgStyle = {
   borderRadius: "50%",
@@ -91,15 +89,14 @@ class Homepage extends Component {
       
       <Col md={{ span: 6}}>
           <p> Followers: <b>{this.props.info.followers}</b></p>
-        
-          <p> Repos: <b>{this.props.repos.length}</b></p>
-
-        
-            <Pie data={this.countLanguages(false)} labels={this.countLanguages(true)} />
+          <p> Following: <b>{this.props.info.following}</b></p>
+          <Pie data={this.countLanguages(false)} labels={this.countLanguages(true)} />
+          <p>Here is a chart containing all of your commits over the past 12 months</p> 
+          <img src={"http://ghchart.rshah.org/0066ff/"+this.props.info.login} alt="Github chart" />
             
       </Col>
       <Col>
-          <p> Following: <b>{this.props.info.following}</b></p>
+          <p> Repos: <b>{this.props.repos.length}</b></p>
           <p> Languages: <b>{this.stringifyLanguages()}</b></p>
       </Col>
             

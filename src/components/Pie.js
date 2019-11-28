@@ -5,7 +5,7 @@
   const Pie = (props) =>{
   return(
     <div class = "pie">
-      <p>Number of repos for each language</p>
+      <p>Here is a pie chart showing your repo languages</p>
       <Plot data = {[
         {
           

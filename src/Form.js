@@ -6,6 +6,9 @@ class Form extends Component{
   render () {
     return (
       <Col md={{ span: 2, offset: 5}}>
+        <centre>
+        <h4>GitHub Visualisation</h4>
+        </centre>
         <form onSubmit={this.props.onSubmit}>
           <label htmlFor="username">Username:</label>
           <input
