@@ -3,9 +3,11 @@
 
 This is a web app built on react showing statistics for a logged in user. The user is authenticated to up the limit of requests from 60 per hour to 5000 per hour. It also uses bootstrap for displaying the information. 
 Login page
+![Login](https://github.com/caolanwall/github-vis/blob/master/screenshots/login%20page.PNG)
 Once the user has been authenticated.
+![Homepage](https://github.com/caolanwall/github-vis/blob/master/screenshots/Homepage.PNG)
 Showing the hover feature over the pie chart.
-
+![Hover](https://github.com/caolanwall/github-vis/blob/master/screenshots/hover.png)
 This project was bootstrapped with [Create React 
 
 App](https://github.com/facebook/create-react-app).
